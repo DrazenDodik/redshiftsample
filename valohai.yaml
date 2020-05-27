@@ -29,5 +29,8 @@
       - name: show-data
         type: execution
         step: Show data
+        override:
+            inputs:
+              - name: sales-data
     edges:
-      - [redshift.output.tr_test.csv, show-data.input.sales-data]
+      - [redshift.output.*.csv, show-data.input.sales-data]
