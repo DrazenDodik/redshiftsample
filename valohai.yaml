@@ -30,4 +30,4 @@
         type: execution
         step: Show data
     edges:
-      - [redshift.output.*, show-data.input.sales-data]
+      - [redshift.output.tr_test.csv, show-data.input.sales-data]
