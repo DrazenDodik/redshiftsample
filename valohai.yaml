@@ -30,4 +30,4 @@
         type: execution
         step: Show data
     edges:
-      - [redshift-node.output.*, show-data.input.sales-data]
+      - [redshift.output.*, show-data.input.sales-data]
