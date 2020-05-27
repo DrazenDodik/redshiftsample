@@ -1,0 +1,33 @@
+---
+
+- step:
+    name: Output from Redshift
+    image: drazend/sample-redshift:0.0.1
+    command:
+        - psql -h $redshift_host -d $database_name -U $redshift_user -p $redshift_port -A -f query.sql -F ',' -o /valohai/outputs/tr_test.csv
+    #inputs:
+    #  - name: example-input
+    #    default: https://example.com/
+    #parameters:
+    # - name: example
+    #   description: Example parameter
+    #   type: integer
+    #   default: 300
+- step:
+    name: Show data
+    image: python:3.6
+    command: python train.py
+    inputs:
+      - name: sales-data
+        default: datum://01725579-773c-74af-2a89-0603898f1ac3
+- pipeline:
+    name: fetch-show
+    nodes:
+      - name: redshift
+        type: execution
+        step: Output from Redshift
+      - name: show-data
+        type: execution
+        step: Show data
+    edges:
+      - [redshift-node.output.*, show-data.input.sales-data]
