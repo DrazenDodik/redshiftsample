@@ -5,14 +5,6 @@
     image: drazend/sample-redshift:0.0.1
     command:
         - psql -h $redshift_host -d $database_name -U $redshift_user -p $redshift_port -A -f query.sql -F ',' -o /valohai/outputs/tr_test.csv
-    #inputs:
-    #  - name: example-input
-    #    default: https://example.com/
-    #parameters:
-    # - name: example
-    #   description: Example parameter
-    #   type: integer
-    #   default: 300
 - step:
     name: Show data
     image: python:3.6
